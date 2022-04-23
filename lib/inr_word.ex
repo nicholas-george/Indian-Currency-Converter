@@ -3,26 +3,44 @@ defmodule InrWord do
   Provides a function `inr_word` to to convert any number and return a map with no and words as keys
   Takes three params. the second and third are optional and default to "₹" for rupee and "paisa' for paisa"
     # Example
-    InrWord.inr_word(70_000_000_000_000.99) # adds default "₹" for Rupees and "paisa" for paisa
-    => %{no: "₹ 70,00,000,00,00,000.99", words: "₹ Seventy lac crore and Ninety-nine paisa"}
 
-    InrWord.inr_word(70_000_000_000_000.99, "Rs.") # adds default "paisa" for paisa
-    => %{no: "Rs. 70,00,000,00,00,000.99", words: "Rs. Seventy lac crore and Ninety-nine paisa"}
+      iex(1)> InrWord.inr_word(70_000_000_000_000.99) # adds defaults "₹" & "paisa"
+      %{
+        no: "₹ 70,00,000,00,00,000.99",
+        words: "₹ Seventy lac crore and ninety-nine paisa"
+      }
 
-    InrWord.inr_word(70_000_000_000_000.99, "Rs.", "") # adds
-    => %{no: "Rs. 70,00,000,00,00,000.99", words: "Rs. Seventy lac crore and Ninety-nine"}
+      iex(1)> InrWord.inr_word(70_000_000_000_000.99, "Rs.") # adds defaults "paisa"
+      %{
+        no: "Rs. 70,00,000,00,00,000.99",
+        words: "Rs. Seventy lac crore and ninety-nine paisa"
+      }
 
-    InrWord.inr_word(70_000_000_000_000.99, "", "") # No defaults applied
-    => %{no: "70,00,000,00,00,000.99", words: " Seventy lac crore and Ninety-nine"}
+      iex(1)> InrWord.inr_word(70_000_000_000_000.99, "Rs.", "")
+      %{
+        no: "Rs. 70,00,000,00,00,000.99",
+        words: "Rs. Seventy lac crore and ninety-nine"
+      }
 
+      iex(1)> InrWord.inr_word(70_000_000_000_000.99, "", "") # No defaults applied
+      %{
+        no: "70,00,000,00,00,000.99",
+        words: "Seventy lac crore and ninety-nine"
+      }
   """
   @ones ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"] ++
           ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen"] ++
           ["seventeen", "eighteen", "nineteen"]
   @tens ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy"] ++
           ["eighty", "ninety"]
+  @doc """
+    # A Function to add default values and calll 'inr_word/3'
+  """
   def inr_word(num), do: inr_word(num, "₹", "paisa")
   @spec inr_word(number, any, any) :: map
+  @doc """
+    # Converts a given number into both number and word strings.
+  """
   def inr_word(num, rs, paisa \\ "paisa") do
     if is_number(num) do
       left = trunc(num)
@@ -92,10 +110,11 @@ defmodule InrWord do
     |> Enum.with_index()
     |> Enum.reduce(%{no: "", words: ""}, fn {x, i}, acc ->
       ins_no = x[:no] <> if i > 0, do: ",", else: ""
-      words_from_map = String.trim(x[:words])
+      # words_from_map = String.trim(x[:words])
 
+      # words_from_map <>
       ins_words =
-        words_from_map <>
+        String.trim(x[:words]) <>
           if i > 0 do
             " crore" <> if(byte_size(Enum.at(map, i - 1)[:words]) > 0, do: " ", else: "")
           else

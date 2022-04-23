@@ -33,8 +33,7 @@ You also use it as a module, in your projects as it is.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `inr_word` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `inr_word` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -44,13 +43,11 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/inr_word>.
+The docs can be found at <https://hexdocs.pm/inr_word>.
 
 ## Why another currency converter?
 
-Most international currency handlers split numbers in three digit parts. The larger ones turn into million, billion, trillion etc. But the Indian currency is split into 3 digit -> hundred, 2 digit -> thousand and 3 digit - lacs. Beyond this it is in crores. And there is no eqivalent of billion, trillion etc. 
+Most international currency handlers split numbers in three digit parts. The larger ones turn into million, billion, trillion etc. But the Indian currency is split into 3 digit -> hundred, 2 digit -> thousand and 2 digit - lacs. Beyond this it is in crores. And there is no eqivalent of billion, trillion etc. 
 
   For example, 
   a number like '9999999999999999' becomes "₹ 9,99,99,999,99,99,999"
@@ -62,4 +59,4 @@ Did not find anything in the open source and in Elixir. Also since the code is n
 
 Copyright (c) 2022 Nicholas George
 
-This work is free. You can redistribute it and/or modify it under the terms of the MIT License. See the LICENSE.md  [LICENSE.md](https://github.com/nicholas-george/Indian-Currency-Converter/blob/master/LICENSE) file for more details.
+This work is free. You can redistribute it and/or modify it under the terms of the MIT License. See the [LICENSE.md](https://github.com/nicholas-george/Indian-Currency-Converter/blob/master/LICENSE) file for more details.
