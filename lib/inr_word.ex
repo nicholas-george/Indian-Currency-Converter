@@ -22,16 +22,20 @@ defmodule InrWord do
   @tens ["zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy"] ++
           ["eighty", "ninety"]
   def inr_word(num), do: inr_word(num, "₹", "paisa")
-
   @spec inr_word(number, any, any) :: map
   def inr_word(num, rs, paisa \\ "paisa") do
-    left = trunc(num)
-    right = ((num - left) * 100) |> round
-    l_str = get_inr_words(left)
-    rs_str = rs <> if byte_size(rs) > 0, do: " ", else: ""
-    l_str = %{l_str | no: rs_str <> l_str[:no], words: rs_str <> l_str[:words]}
+    if is_number(num) do
+      left = trunc(num)
+      right = ((num - left) * 100) |> round
+      l_str = get_inr_words(left)
+      l_str = %{l_str | words: String.capitalize(l_str[:words])}
+      rs_str = rs <> if byte_size(rs) > 0, do: " ", else: ""
+      l_str = %{l_str | no: rs_str <> l_str[:no], words: rs_str <> l_str[:words]}
 
-    if right > 0, do: get_right(l_str, right, paisa, left), else: l_str
+      if right > 0, do: get_right(l_str, right, paisa, left), else: l_str
+    else
+      %{error: "Not a number."}
+    end
   end
 
   defp get_inr_words(no) do
