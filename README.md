@@ -1,6 +1,5 @@
 # InrWord
 
-**TODO: Add description**
 An elixir utility to convert numbers into Indian currency.
 
 ## Installation
