@@ -9,14 +9,14 @@ If you want to just play around, copy / paste the whole code from lib/inr_word.e
 iex> InrWord.inr_word(90000000)
 %{no: "₹ 9,00,00,000", words: "₹ Nine crore"}
 
+iex> InrWord.inr_word(90000000.09)
+%{no: "₹ 9,00,00,000.09", words: "₹ Nine crore and nine paisa"}
+
 iex> InrWord.inr_word(90000000, "Rs.")
 %{no: "Rs. 9,00,00,000", words: "Rs. Nine crore"}
 
 iex> InrWord.inr_word(90000000.09, "Rupees.")
 %{no: "Rupees. 9,00,00,000.09", words: "Rs. Nine crore and nine paisa"}
-
-iex> InrWord.inr_word(90000000.09)
-%{no: "₹ 9,00,00,000.09", words: "₹ Nine crore and nine paisa"}
 
 iex> InrWord.inr_word(90000000.09, "Rs.", "Ps.")
 %{no: "Rs. 9,00,00,000.09", words: "Rs. Nine crore and nine Ps."}
@@ -55,4 +55,4 @@ Most international currency handlers split numbers in three digit parts. The lar
   a number like '9999999999999999' becomes "₹ 9,99,99,999,99,99,999"
   And in words, "₹ Nine crore ninety-nine lac ninety-nine thousand nine hundred ninety-nine crore ninety-nine lac ninety-nine thousand nine hundred ninety-nine"
 
-Did not find anything in the open source and in Elixir. Also since the code is not large (109 lines) will be useful for a Elixir beginner to learn something.
+Did not find anything in the open source and in Elixir. Also since the code is not large (109 lines) this may be useful for a Elixir beginner to learn things that I learnt doing this project -- recursion, pattern matching, Enum, Map, String....
