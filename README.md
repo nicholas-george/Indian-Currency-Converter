@@ -56,3 +56,9 @@ Most international currency handlers split numbers in three digit parts. The lar
   And in words, "₹ Nine crore ninety-nine lac ninety-nine thousand nine hundred ninety-nine crore ninety-nine lac ninety-nine thousand nine hundred ninety-nine"
 
 Did not find anything in the open source and in Elixir. Also since the code is not large (109 lines) this may be useful for a Elixir beginner to learn things that I learnt doing this project -- recursion, pattern matching, Enum, Map, String....
+
+## Copyright and License
+
+Copyright (c) 2022 Nicholas George
+
+This work is free. You can redistribute it and/or modify it under the terms of the MIT License. See the LICENSE.md  [LICENSE.md](https://github.com/nicholas-george/Indian-Currency-Converter/blob/master/LICENSE) file for more details.
