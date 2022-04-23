@@ -15,6 +15,9 @@ iex> InrWord.inr_word(90000000, "Rs.")
 iex> InrWord.inr_word(90000000.09, "Rupees.")
 %{no: "Rupees. 9,00,00,000.09", words: "Rs. Nine crore and nine paisa"}
 
+iex> InrWord.inr_word(90000000.09)
+%{no: "₹ 9,00,00,000.09", words: "₹ Nine crore and nine paisa"}
+
 iex> InrWord.inr_word(90000000.09, "Rs.", "Ps.")
 %{no: "Rs. 9,00,00,000.09", words: "Rs. Nine crore and nine Ps."}
 
