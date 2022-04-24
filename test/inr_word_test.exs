@@ -38,8 +38,4 @@ defmodule InrWordTest do
   test "Smaller number" do
     assert InrWord.inr_word(97).no == "₹ 97"
   end
-
-  test "Performance under 100 μs" do
-    assert FunctionTimer.timed_fun(InrWord, :inr_word, [999_999_999.09]) |> elem(0) < 100
-  end
 end

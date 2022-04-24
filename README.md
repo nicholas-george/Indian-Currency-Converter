@@ -29,7 +29,7 @@ iex> InrWord.inr_word("abc")
 %{error: "Not a number."}
 ```
 
-You also use it as a module, in your projects as it is.
+You can also use it as a module, in your projects as it is.
 
 ## Installation
 
