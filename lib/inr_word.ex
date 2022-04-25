@@ -110,9 +110,7 @@ defmodule InrWord do
     |> Enum.with_index()
     |> Enum.reduce(%{no: "", words: ""}, fn {x, i}, acc ->
       ins_no = x[:no] <> if i > 0, do: ",", else: ""
-      # words_from_map = String.trim(x[:words])
 
-      # words_from_map <>
       ins_words =
         String.trim(x[:words]) <>
           if i > 0 do
