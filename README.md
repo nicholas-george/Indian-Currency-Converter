@@ -55,6 +55,10 @@ Most international currency handlers split numbers in three digit parts. The lar
 
 Did not find anything in the open source and in Elixir. Also since the code is not large (109 lines) this may be useful for a Elixir beginner to learn things that I learnt doing this project -- recursion, pattern matching, Enum, Map, String....
 
+## Looking for a javascript version?
+
+If you are looking for a javascript version, you can look at [inr_in_words](https://github.com/nicholas-george/inr_in_words).
+
 ## Copyright and License
 
 Copyright (c) 2022 Nicholas George
