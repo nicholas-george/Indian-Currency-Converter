@@ -43,13 +43,11 @@ defmodule InrWord do
   """
   def inr_word(num, rs, paisa \\ "paisa") do
     if is_number(num) do
-      left = trunc(num)
+      [left, rs_str] = [trunc(num), rs <> if(byte_size(rs) > 0, do: " ", else: "")]
       right = ((num - left) * 100) |> round
       l_str = get_inr_words(left)
       l_str = %{l_str | words: String.capitalize(l_str[:words])}
-      rs_str = rs <> if byte_size(rs) > 0, do: " ", else: ""
       l_str = %{l_str | no: rs_str <> l_str[:no], words: rs_str <> l_str[:words]}
-
       if right > 0, do: get_right(l_str, right, paisa, left), else: l_str
     else
       %{error: "Not a number."}
@@ -67,9 +65,13 @@ defmodule InrWord do
 
   defp get_right(l_str, right, paisa, left) do
     r_str = get_inr_words(right)
-    r_no = "." <> String.pad_leading(r_str[:no], 2, "0")
-    sep = if left == 0, do: "", else: " and "
-    paisa_str = if byte_size(paisa) > 0, do: " " <> paisa, else: ""
+
+    [r_no, sep, paisa_str] = [
+      "." <> String.pad_leading(r_str[:no], 2, "0"),
+      (left == 0 && "") || " and ",
+      (byte_size(paisa) > 0 && " " <> paisa) || ""
+    ]
+
     r_words = sep <> r_str[:words] <> paisa_str
     %{l_str | no: l_str[:no] <> r_no, words: l_str[:words] <> r_words}
   end
@@ -93,31 +95,26 @@ defmodule InrWord do
   end
 
   defp update_acc(acc, ord, ord_val) do
-    sep = if byte_size(acc[:no]) > 0, do: ",", else: ""
+    sep = (byte_size(acc[:no]) > 0 && ",") || ""
     ord_val_str = ord_val |> Enum.reduce("", fn x, c -> c <> to_string(x) end)
     ord_val_str = sep <> ord_val_str
     ord_val = ord_val |> Enum.join() |> Integer.parse() |> elem(0)
     acc = %{acc | no: acc[:no] <> ord_val_str}
-    ord_str = if ord !== :hundred, do: to_string(ord), else: ""
-
-    if ord_val > 0,
-      do: %{acc | words: acc[:words] <> get_no_str(ord_val, ord_str)},
-      else: acc
+    ord_str = (ord !== :hundred && to_string(ord)) || ""
+    (ord_val > 0 && %{acc | words: acc[:words] <> get_no_str(ord_val, ord_str)}) || acc
   end
 
   defp package(map) do
     map
     |> Enum.with_index()
     |> Enum.reduce(%{no: "", words: ""}, fn {x, i}, acc ->
-      ins_no = x[:no] <> if i > 0, do: ",", else: ""
+      ins_no = x[:no] <> ((i > 0 && ",") || "")
 
       ins_words =
         String.trim(x[:words]) <>
-          if i > 0 do
-            " crore" <> if(byte_size(Enum.at(map, i - 1)[:words]) > 0, do: " ", else: "")
-          else
-            ""
-          end
+          if i > 0,
+            do: " crore" <> ((byte_size(Enum.at(map, i - 1)[:words]) > 0 && " ") || ""),
+            else: ""
 
       %{acc | no: ins_no <> acc[:no], words: ins_words <> acc[:words]}
     end)
