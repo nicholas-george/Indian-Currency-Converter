@@ -47,7 +47,7 @@ The docs can be found at <https://hexdocs.pm/inr_word>.
 
 ## Why another currency converter?
 
-Most international currency handlers split numbers in three digit parts. The larger ones turn into million, billion, trillion etc. But the Indian currency is split into 3 digit -> hundred, 2 digit -> thousand and 2 digit - lacs. Beyond this it is in crores. And there is no eqivalent of billion, trillion etc. 
+Most international currency handlers split numbers in three digit parts. The larger ones turn into million, billion, trillion etc. But the Indian currency is split into 3 digit -> hundred, 2 digit -> thousand and 2 digit - lacs. Beyond this it is in crores. And there is no equivalent of billion, trillion etc. 
 
   For example, 
   a number like '9999999999999999' becomes "₹ 9,99,99,999,99,99,999"
